@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <script>
+    /* Roda antes de desenhar a página: marca se há sessão, para o CSS mostrar ou esconder o menu privado sem piscar. */
+    try { if (localStorage.getItem("token")) { document.documentElement.classList.add("logado"); } } catch (e) {}
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroCompartilha | Entrar</title>
+  <link rel="icon" type="image/png" href="img/logotipo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400..600,0..1,0&icon_names=calendar_month,call,check_circle,error,menu,search,star&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="pagina-acesso">
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a class="marca" href="index.html"><span class="marca-selo"><img src="img/logotipo.png" alt="" width="38" height="35"></span><span class="marca-texto">AgroCompartilha</span></a>
+      <a class="voltar-catalogo" href="index.html"><span aria-hidden="true">←</span> Voltar<span class="texto-longo"> ao catálogo</span></a>
+      <div id="area-usuario" class="area-usuario"></div>
+      <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal"><span class="material-symbols-rounded" aria-hidden="true">menu</span>Menu</button>
+      <nav id="menu-principal" class="menu" aria-label="Menu principal">
+        <ul>
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="cadastro-equipamento.html">Meus equipamentos</a></li>
+          <li><a href="minhas-reservas.html">Minhas reservas</a></li>
+          <li><a href="reservas-recebidas.html">Reservas recebidas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="painel-estreito">
+      <img class="logo-destaque" src="img/logotipo.png" alt="Logotipo do AgroCompartilha" width="120" height="111">
+      <h1 class="centralizado">Entrar</h1>
+      <p class="subtitulo centralizado">Use o CPF ou CNPJ e a senha do seu cadastro.</p>
+
+      <div id="mensagem" class="mensagem" role="status" aria-live="polite"></div>
+
+      <section class="painel" aria-label="Formulário de login">
+        <form id="form-login" novalidate>
+          <div class="grade-campos">
+            <div class="campo campo-largo">
+              <label for="documento">CPF ou CNPJ</label>
+              <div>
+                
+                <input type="text" id="documento" inputmode="numeric" autocomplete="username" maxlength="18" placeholder="000.000.000-00" required>
+              </div>
+              <span class="erro-campo" id="erro-documento"></span>
+            </div>
+            <div class="campo campo-largo">
+              <label for="senha">Senha</label>
+              <div>
+                
+                <input type="password" id="senha" autocomplete="current-password" required>
+              </div>
+              <span class="erro-campo" id="erro-senha"></span>
+            </div>
+          </div>
+          <div class="acoes-form">
+            <button type="submit" class="botao" id="botao-entrar" style="flex: 1 1 auto;">Entrar</button>
+          </div>
+        </form>
+      </section>
+
+      <p class="alternar-acesso">Ainda não tem conta? <a href="perfil.html">Criar conta</a></p>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    AgroCompartilha · Global Solution 2026/2 · FIAP · ODS 2, 10 e 12
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/entrar.js"></script>
+</body>
+
+</html>

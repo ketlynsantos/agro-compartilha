@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <script>
+    /* Página restrita: sem sessão, vai direto para o login antes de desenhar qualquer coisa. */
+    try {
+      if (localStorage.getItem("token")) {
+        document.documentElement.classList.add("logado");
+      } else {
+        location.replace("entrar.html?voltar=" + encodeURIComponent(location.pathname.split("/").pop()));
+      }
+    } catch (e) {}
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroCompartilha | Reservas recebidas</title>
+  <link rel="icon" type="image/png" href="img/logotipo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400..600,0..1,0&icon_names=calendar_month,call,check_circle,error,menu,search,star&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-papel="dono">
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a class="marca" href="index.html"><span class="marca-selo"><img src="img/logotipo.png" alt="" width="38" height="35"></span><span class="marca-texto">AgroCompartilha</span></a>
+      <div id="area-usuario" class="area-usuario"></div>
+      <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal"><span class="material-symbols-rounded" aria-hidden="true">menu</span>Menu</button>
+      <nav id="menu-principal" class="menu" aria-label="Menu principal">
+        <ul>
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="cadastro-equipamento.html">Meus equipamentos</a></li>
+          <li><a href="minhas-reservas.html">Minhas reservas</a></li>
+          <li><a href="reservas-recebidas.html" aria-current="page">Reservas recebidas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Reservas recebidas</h1>
+    <p class="subtitulo">Pedidos dos vizinhos para usar os seus equipamentos. Veja a reputação de cada um antes de aprovar.</p>
+
+    <div id="mensagem" class="mensagem" role="status" aria-live="polite"></div>
+
+    <div class="filtros">
+      <div class="campo">
+        <label for="filtro-status">Situação</label>
+        <select id="filtro-status">
+          <option value="">Todas</option>
+          <option value="PENDENTE">Pendentes</option>
+          <option value="APROVADA">Aprovadas</option>
+          <option value="CONCLUIDA">Devolvidas</option>
+          <option value="REJEITADA">Rejeitadas</option>
+          <option value="CANCELADA">Canceladas</option>
+        </select>
+      </div>
+    </div>
+
+    <section aria-label="Lista de reservas">
+      <div id="lista-reservas" class="cartoes" aria-live="polite">
+        <p class="vazio">Carregando...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    AgroCompartilha · Global Solution 2026/2 · FIAP · ODS 2, 10 e 12
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/reservas.js"></script>
+</body>
+
+</html>
