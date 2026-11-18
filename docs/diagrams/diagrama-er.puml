@@ -1,0 +1,90 @@
+@startuml diagrama-er
+
+title AgroCompartilha - Diagrama Entidade-Relacionamento
+
+hide circle
+hide empty members
+skinparam linetype ortho
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+entity "PRODUTOR" as produtor {
+  id : NUMBER <<PK>>
+  --
+  nome : VARCHAR2(100)
+  documento : VARCHAR2(14)
+  telefone : VARCHAR2(11)
+  municipio : VARCHAR2(80)
+  senha_hash : VARCHAR2(200)
+}
+
+entity "EQUIPAMENTO" as equipamento {
+  id : NUMBER <<PK>>
+  --
+  produtor_id : NUMBER <<FK>>
+  nome : VARCHAR2(100)
+  descricao : VARCHAR2(500)
+  tipo : VARCHAR2(20)
+  valor_diaria : NUMBER(10,2)
+  disponivel : NUMBER(1)
+  ativo : NUMBER(1)
+}
+
+entity "MAQUINA_MOTORIZADA" as maquina {
+  equipamento_id : NUMBER <<PK, FK>>
+  --
+  potencia_cv : NUMBER(6,1)
+  tipo_combustivel : VARCHAR2(20)
+}
+
+entity "IMPLEMENTO_AGRICOLA" as implemento {
+  equipamento_id : NUMBER <<PK, FK>>
+  --
+  tipo_implemento : VARCHAR2(50)
+  compatibilidade : VARCHAR2(200)
+}
+
+entity "RESERVA" as reserva {
+  id : NUMBER <<PK>>
+  --
+  produtor_solicitante_id : NUMBER <<FK>>
+  equipamento_id : NUMBER <<FK>>
+  data_inicio : DATE
+  data_fim : DATE
+  status : VARCHAR2(20)
+  valor_total : NUMBER(10,2)
+}
+
+entity "AVALIACAO" as avaliacao {
+  id : NUMBER <<PK>>
+  --
+  reserva_id : NUMBER <<FK>>
+  avaliador_id : NUMBER <<FK>>
+  avaliado_id : NUMBER <<FK>>
+  nota : NUMBER(1)
+  comentario : VARCHAR2(500)
+  data_avaliacao : DATE
+}
+
+' ---------------- Relacionamentos principais ----------------
+
+produtor ||--o{ equipamento : "oferece"
+
+equipamento ||--o| maquina : "é do tipo"
+equipamento ||--o| implemento : "é do tipo"
+
+produtor ||--o{ reserva : "solicita"
+equipamento ||--o{ reserva : "é reservado em"
+
+' Depois de devolvido, cada parte avalia a outra
+reserva ||--o{ avaliacao : "recebe"
+produtor ||--o{ avaliacao : "avalia"
+produtor ||--o{ avaliacao : "é avaliado"
+
+note bottom of reserva
+  Tabela associativa do relacionamento
+  N:N entre PRODUTOR e EQUIPAMENTO
+end note
+
+@enduml

@@ -1,0 +1,122 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+title AgroCompartilha - Diagrama de Classes
+
+enum TipoEquipamento {
+  MOTORIZADA
+  IMPLEMENTO
+}
+
+enum TipoCombustivel {
+  DIESEL
+  GASOLINA
+}
+
+enum StatusReserva {
+  PENDENTE
+  APROVADA
+  REJEITADA
+  CONCLUIDA
+  CANCELADA
+}
+
+class Produtor {
+  - id: Long <<PK>>
+  - nome: String
+  - documento: String
+  - telefone: String
+  - municipio: String
+  - senhaHash: String
+  - reputacao: Reputacao
+}
+
+class Reputacao {
+  - media: double
+  - total: int
+  + {static} semAvaliacoes(): Reputacao
+  + temAvaliacoes(): boolean
+}
+
+abstract class Equipamento {
+  - id: Long <<PK>>
+  - dono: Produtor
+  - nome: String
+  - descricao: String
+  - valorDiaria: BigDecimal
+  - disponivel: boolean
+  - ativo: boolean
+  + {abstract} getTipo(): TipoEquipamento
+  + {abstract} getDescricaoTecnica(): String
+  + isGratuito(): boolean
+  + calcularValor(long dias): BigDecimal
+  + podeSerReservado(): boolean
+  + pertenceA(Long produtorId): boolean
+}
+
+class MaquinaMotorizada {
+  - potenciaCv: double
+  - tipoCombustivel: TipoCombustivel
+  + getTipo(): TipoEquipamento
+  + getDescricaoTecnica(): String
+}
+
+class ImplementoAgricola {
+  - tipoImplemento: String
+  - compatibilidade: String
+  + getTipo(): TipoEquipamento
+  + getDescricaoTecnica(): String
+}
+
+class Reserva {
+  - id: Long <<PK>>
+  - solicitante: Produtor
+  - equipamento: Equipamento
+  - dataInicio: LocalDate
+  - dataFim: LocalDate
+  - status: StatusReserva
+  - valorTotal: BigDecimal
+  - avaliadaPeloSolicitante: boolean
+  - avaliadaPeloDono: boolean
+  + getDias(): long
+  + calcularValorTotal(): void
+  + sobrepoe(Reserva outra): boolean
+  + aprovar(LocalDate hoje): void
+  + rejeitar(): void
+  + cancelar(LocalDate hoje): void
+  + concluir(LocalDate hoje): void
+  + envolve(Long produtorId): boolean
+  + outraParte(Long produtorId): Produtor
+  - exigirStatus(StatusReserva esperado, String acao): void
+}
+
+class Avaliacao {
+  - id: Long <<PK>>
+  - reservaId: Long
+  - avaliadorId: Long
+  - avaliadoId: Long
+  - nota: int
+  - comentario: String
+  - data: LocalDate
+  - avaliadorNome: String
+  - equipamentoNome: String
+}
+
+Produtor "1" *-- "1" Reputacao : possui
+Equipamento "*" --> "1" Produtor : pertence a
+
+Equipamento <|-- MaquinaMotorizada
+Equipamento <|-- ImplementoAgricola
+
+Equipamento --> TipoEquipamento : classificado como
+MaquinaMotorizada --> TipoCombustivel : usa
+
+Reserva "*" --> "1" Produtor : solicitada por
+Reserva "*" --> "1" Equipamento : reserva
+Reserva --> StatusReserva : status
+
+Avaliacao "*" --> "1" Reserva : refere-se a
+Avaliacao "*" --> "1" Produtor : feita por
+Avaliacao "*" --> "1" Produtor : recebida por
+
+@enduml
