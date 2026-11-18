@@ -211,7 +211,7 @@ async function chamarApi(metodo, caminho, corpo, semRedirecionar) {
     resposta = await fetch(API_BASE + caminho, opcoes);
   } catch (erro) {
     throw new Error("Não foi possível conectar à API em " + API_BASE +
-      ". Verifique se o projeto agrocompartilha-java está rodando.");
+      ". Verifique se o backend está rodando.");
   }
 
   if (resposta.status === 401 && sessao) {

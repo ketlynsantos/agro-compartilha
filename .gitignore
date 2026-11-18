@@ -1,16 +1,16 @@
 .env
-agrocompartilha-java/.env
+backend/.env
 
 # Build do Maven / classes compiladas
 target/
-agrocompartilha-java/target/
+backend/target/
 *.class
 *.jar
 
 # IDEs
 .idea/
-agrocompartilha-java/.idea/
-agrocompartilha-web/.idea/
+backend/.idea/
+frontend/.idea/
 *.iml
 .vscode/
 out/

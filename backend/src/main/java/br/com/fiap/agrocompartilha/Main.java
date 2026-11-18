@@ -23,7 +23,7 @@ public class Main {
         System.out.println("=================================================");
         System.out.println(" API do AgroCompartilha rodando!");
         System.out.println(" Teste: http://localhost:" + porta + "/api/equipamentos");
-        System.out.println(" Abra o index.html do projeto agrocompartilha-web.");
+        System.out.println(" Abra o index.html da pasta frontend.");
         System.out.println(" Pressione Ctrl+C para parar.");
         System.out.println("=================================================");
 
