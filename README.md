@@ -48,7 +48,6 @@ agrocompartilha/
 │   ├── diagrama-classes.puml    ← diagrama de classes (UML)
 │   ├── diagrama-er.puml         ← diagrama entidade-relacionamento
 │   └── *.png                    ← imagens dos diagramas
-└── entrega.txt          ← grupo, integrantes (RM) e link do pitch
 ```
 
 ---
