@@ -1,4 +1,4 @@
-# AgroCompartilha 🚜
+# AgroCompartilha
 
 **Global Solution 2026/2 · FIAP · 2º ano de Engenharia de Software (2ESOA) · Tema: CitizenTech**
 
