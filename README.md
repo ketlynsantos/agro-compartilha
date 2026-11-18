@@ -217,8 +217,4 @@ Usamos o **Claude (Anthropic)** como ferramenta de apoio nestas etapas:
 
 **Como usamos:** a IA foi usada como apoio. Revisamos e testamos o que foi sugerido antes de usar, e cada integrante sabe explicar a parte que apresenta.
 
----
 
-## 9. Integrantes
-
-Ver `entrega.txt`.
