@@ -27,7 +27,7 @@ Plataforma em que **pequenos produtores rurais compartilham máquinas e implemen
 ```
 agrocompartilha/
 ├── README.md                    ← este arquivo
-├── backend/        ← backend: Java + JDBC + API REST (Maven)
+├── backend/                     ← Java + JDBC + API REST (Maven)
 │   ├── pom.xml
 │   ├── .env.example             ← modelo das credenciais do Oracle
 │   ├── db/schema.sql            ← script do banco (CREATE TABLE + INSERTs)
@@ -39,15 +39,18 @@ agrocompartilha/
 │       ├── resource/mapper/     ← tratamento de erros (exceção → resposta JSON)
 │       ├── dto/  exception/  factory/  seguranca/
 │       └── Main.java            ← sobe o servidor
-├── frontend/         ← frontend: HTML + CSS + JavaScript puros
+├── frontend/                    ← HTML + CSS + JavaScript puros
 │   ├── index.html               ← catálogo (página inicial)
 │   ├── entrar.html  perfil.html  cadastro-equipamento.html
 │   ├── minhas-reservas.html  reservas-recebidas.html
-│   ├── css/style.css   js/*.js   img/logotipo.png
-├── docs/diagrams/
-│   ├── diagrama-classes.puml    ← diagrama de classes (UML)
-│   ├── diagrama-er.puml         ← diagrama entidade-relacionamento
-│   └── *.png                    ← imagens dos diagramas
+│   ├── css/style.css
+│   ├── js/                      ← api.js (compartilhado) + um script por página
+│   └── img/logotipo.png
+└── docs/diagrams/
+    ├── diagrama-classes.puml    ← diagrama de classes (UML)
+    ├── diagrama-classes.png
+    ├── diagrama-er.puml         ← diagrama entidade-relacionamento
+    └── diagrama-er.png
 ```
 
 ---
@@ -85,9 +88,6 @@ ORACLE_JDBC_URL=jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
 ORACLE_USER=rmXXXXXX
 ORACLE_PASSWORD=sua_senha
 ```
-
-> O `.env` não vai para o Git (está no `.gitignore`): nenhuma senha fica no código.
-> Também é possível definir essas três variáveis de ambiente no sistema em vez de usar o arquivo.
 
 ### Passo 3 – Subir o backend (API)
 **Pelo terminal**, dentro de `backend/`:
