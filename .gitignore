@@ -1,0 +1,29 @@
+.env
+agrocompartilha-java/.env
+
+# Build do Maven / classes compiladas
+target/
+agrocompartilha-java/target/
+*.class
+*.jar
+
+# IDEs
+.idea/
+agrocompartilha-java/.idea/
+agrocompartilha-web/.idea/
+*.iml
+.vscode/
+out/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs e temporários
+*.log
+*.tmp
+node_modules/
+
+# Arquivos para entrega do projeto
+entrega.txt
