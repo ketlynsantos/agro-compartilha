@@ -156,7 +156,7 @@ Para testar no celular na mesma rede Wi-Fi, abra a pasta `frontend` com um servi
 | Reserva | `inserir` | `listarPorSolicitante`, `listarPorDono`, `listarAprovadasPorEquipamento` | `buscarPorId` | `atualizarStatus` | — (ver abaixo) |
 | Avaliação | `inserir` | `listarRecebidas` | `existeAvaliacao` | — | — |
 
-> **Decisões de projeto:** um equipamento **sem reservas** é apagado de verdade (`DELETE`); um equipamento **com reservas** é desativado (`ativo = 0`), para não apagar o histórico de reservas e as avaliações dos produtores. Reservas nunca são apagadas, só mudam de status (pendente, aprovada, rejeitada, cancelada, devolvida).
+> **Decisões de projeto:** um equipamento **sem reservas** é apagado de verdade (`DELETE`); um equipamento **com reservas** é desativado (`ativo = 0`), para não apagar o histórico de reservas e as avaliações dos produtores. Reservas nunca são apagadas, só mudam de status (`PENDENTE`, `APROVADA`, `REJEITADA`, `CANCELADA` e `CONCLUIDA`, que é quando o equipamento é devolvido).
 
 - **Tratamento de erros:** exceções de banco e entradas inválidas viram mensagens claras em JSON (ex.: *"Já existe um cadastro com este CPF/CNPJ"*), sem derrubar o servidor (`resource/mapper`).
 
